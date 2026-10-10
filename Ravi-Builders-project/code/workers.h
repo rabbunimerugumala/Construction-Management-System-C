@@ -163,7 +163,7 @@ void update_worker_details(char *filepath)
             break;
         }
 
-        printf("*** ERROR:invaild project id entered ***\n");
+        printf("*** ERROR:invalid worker id entered ***\n");
         printf("\nEnter worker ID to update: ");
     }
     while (fread(&wkr, sizeof(wkr), 1, f) == 1)
@@ -464,13 +464,13 @@ void get_workers_transactions(char *filepath)
     {
         fflush(stdin);
 
-        if (vaildate_workerid(filepath, worker_id) == 1)
+        if (vaildate_workerid("data/worker_data.dat", worker_id) == 1)
         {
             break;
         }
 
-        printf("\n*** ERROR:invaild project id entered ***\n");
-        printf("\nEnter worker ID to update: ");
+        printf("\n*** ERROR:invalid worker id entered ***\n");
+        printf("\nEnter worker ID: ");
     }
 
     printf("Select \"transaction type\": ");

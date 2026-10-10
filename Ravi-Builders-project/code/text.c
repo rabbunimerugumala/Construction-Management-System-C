@@ -9,6 +9,6 @@
 #include "attendance.h"
 void main()
 {
-    char proj_filepath[200] = "C:\\Users\\rabbu\\OneDrive\\Desktop\\Rabbuni\\project\\data\\project_data.dat";
+    char proj_filepath[200] = "C:\\Users\\rabbu\\OneDrive\\Documents\\coding\\c\\Ravi-Builders-project\\data\\project_data.dat";
     printf("%d", vaildate_projectid(proj_filepath, "RBP0001"));
 }

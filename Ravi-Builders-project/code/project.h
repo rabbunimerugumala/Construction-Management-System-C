@@ -256,15 +256,15 @@ void update_project(char *filepath)
                 scanf("%d", &choice);
                 if (choice == 1)
                 {
-                    strcpy(proj.status, "contract");
+                    strcpy(proj.type, "contract");
                 }
                 else if (choice == 2)
                 {
-                    strcpy(proj.status, "material-contract");
+                    strcpy(proj.type, "material-contract");
                 }
                 else if (choice == 3)
                 {
-                    strcpy(proj.status, "non-contarct");
+                    strcpy(proj.type, "non-contract");
                 }
                 else
                 {
@@ -302,7 +302,7 @@ void update_project(char *filepath)
                 }
             }
 
-            if (strcmp(proj.status, "non-contarct") != 0)
+            if (strcmp(proj.type, "non-contract") != 0)
             {
                 printf("Do you want to update \"cost per square feet\" (Y/N): ");
                 fflush(stdin);
@@ -353,7 +353,7 @@ void update_project(char *filepath)
             {
                 printf("Enter updated \"owner name\": ");
                 fflush(stdin);
-                scanf("%s", proj.ownr.name);
+                scanf("%[^\n]%*c", proj.ownr.name);
             }
 
             printf("Do you want to update \"owner phone number\" (Y/N): ");
@@ -363,7 +363,7 @@ void update_project(char *filepath)
             {
                 printf("Enter updated \"owner phone number\": ");
                 fflush(stdin);
-                scanf("%s", proj.ownr.phone_number);
+                scanf("%[^\n]%*c", proj.ownr.phone_number);
             }
 
             printf("Do you want to update \"owner address\" (Y/N): ");
@@ -373,7 +373,7 @@ void update_project(char *filepath)
             {
                 printf("Enter updated \"owner address\": ");
                 fflush(stdin);
-                scanf("%s", proj.ownr.address);
+                scanf("%[^\n]%*c", proj.ownr.address);
             }
 
             // updating the record in file
@@ -385,9 +385,9 @@ void update_project(char *filepath)
             break;
         }
     }
-    if (flag = 0)
+    if (flag == 0)
     {
-        printf("\n*** ERROR:Invaild project id ***");
+        printf("\n*** ERROR:Invalid project id ***");
     }
     fclose(f);
 }
@@ -478,6 +478,7 @@ void create_transaction(char *filepath)
         printf("\n*** ERROR:invaild project id entered ***\n");
         printf("\nEnter project ID to create the transaction: ");
     }
+    strcpy(trsn.project_id, proj_id);
     printf("Date (dd/mm/yyyy): ");
     fflush(stdin);
     scanf("%s", trsn.date);
@@ -539,13 +540,13 @@ void update_transaction(char *filepath)
     {
         fflush(stdin);
 
-        if (vaildate_project_trsnid(filepath, trsn.id) == 1)
+        if (vaildate_project_trsnid(filepath, trsn_id) == 1)
         {
             break;
         }
 
-        printf("\n*** ERROR:invaild project id entered ***\n");
-        printf("\nEnter project ID to update: ");
+        printf("\n*** ERROR:invalid transaction id entered ***\n");
+        printf("\nEnter transaction ID to update: ");
     }
     // while (scanf("%s", trsn_id))
     // {
@@ -615,9 +616,9 @@ void update_transaction(char *filepath)
             break;
         }
     }
-    if (flag = 0)
+    if (flag == 0)
     {
-        printf("\n*** EEROR: invaild transaction id ***");
+        printf("\n*** ERROR: Invalid transaction id ***");
     }
     fclose(f);
 }
@@ -635,9 +636,8 @@ void get_project_transactions(char *filepath)
         exit(1);
     }
     printf("\n*** Project transactions details ***\n");
-    printf("enter the \"project ID\": ");
+    printf("Enter the \"project ID\": ");
     fflush(stdin);
-    scanf("%s", proj_id);
     while (scanf("%s", proj_id))
     {
         fflush(stdin);
@@ -647,8 +647,8 @@ void get_project_transactions(char *filepath)
             break;
         }
 
-        printf("*** ERROR:invaild project id entered ***\n");
-        printf("enter the \"project ID\": ");
+        printf("*** ERROR:invalid project id entered ***\n");
+        printf("Enter the \"project ID\": ");
     }
     printf("\n--------------------------------------------------------\n");
     printf("Date\t\tTransaction ID\tProject ID\tAmount\n");
@@ -657,7 +657,7 @@ void get_project_transactions(char *filepath)
     while (fread(&trsn, sizeof(struct Transaction), 1, f) == 1)
     {
 
-        if (strcmpi(trsn.project_id, proj_id) == 0)
+        if (strcmp(trsn.project_id, proj_id) == 0)
         {
             printf("%s\t%s\t%s\t\t%d\n", trsn.date, trsn.id, trsn.project_id, trsn.amount);
             total += trsn.amount;

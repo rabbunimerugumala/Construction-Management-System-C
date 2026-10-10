@@ -20,11 +20,12 @@ int vaildate_workerid(char *filename, char *id)
     {
         if (strcmp(wkr.id, id) == 0)
         {
+            fclose(f);
             return 1;
         }
     }
-    return 0;
     fclose(f);
+    return 0;
 }
 
 int vaildate_projectid(char *filename, char *id)
@@ -41,11 +42,12 @@ int vaildate_projectid(char *filename, char *id)
         printf("%s %s\n", proj.id, id);
         if (strcmp(proj.id, id) == 0)
         {
+            fclose(f);
             return 1;
         }
     }
-    return 0;
     fclose(f);
+    return 0;
 }
 
 int vaildate_project_trsnid(char *filename, char *id)
@@ -61,11 +63,12 @@ int vaildate_project_trsnid(char *filename, char *id)
     {
         if (strcmp(trsn.id, id) == 0)
         {
+            fclose(f);
             return 1;
         }
     }
-    return 0;
     fclose(f);
+    return 0;
 }
 
 int vaildate_worker_trsnid(char *filename, char *id)
@@ -79,11 +82,12 @@ int vaildate_worker_trsnid(char *filename, char *id)
     }
     while (fread(&wkrtrsn, sizeof(wkrtrsn), 1, f) == 1)
     {
-        if (strcmp(trsn.id, id) == 0)
+        if (strcmp(wkrtrsn.id, id) == 0)
         {
+            fclose(f);
             return 1;
         }
     }
-    return 0;
     fclose(f);
+    return 0;
 }

@@ -23,7 +23,7 @@ void create_attendance(char *filepath)
 {
     int ch;
     FILE *f;
-    f = fopen(filepath, "a+");
+    f = fopen(filepath, "a+b");
     if (f == NULL)
     {
         printf("*** ERROR: unable to open the file to create the project ***\n");
@@ -45,7 +45,7 @@ void create_attendance(char *filepath)
 
     printf("Status\n");
     printf("1.Present\n2.Absent\n");
-    printf("Enter yours choice: ");
+    printf("Enter your choice: ");
     fflush(stdin);
     scanf("%d", &ch);
     if (ch == 1)
@@ -137,14 +137,14 @@ void update_attendance(char *filepath)
             {
                 printf("Status\n");
                 printf("1.Present\n2.Absent\n");
-                printf("Enter yours choice: ");
+                printf("Enter your choice: ");
                 fflush(stdin);
-                scanf("%d", &ch);
-                if (ch == 1)
+                scanf("%d", &choice);
+                if (choice == 1)
                 {
                     strcpy(atd.status, "P");
                 }
-                else if (ch == 2)
+                else if (choice == 2)
                 {
                     strcpy(atd.status, "A");
                 }
@@ -162,9 +162,9 @@ void update_attendance(char *filepath)
             break;
         }
     }
-    if (flag = 0)
+    if (flag == 0)
     {
-        printf("\n*** ERROR:Invaild Worker ID ***");
+        printf("\n*** ERROR:Invalid Worker ID ***");
     }
     fclose(f);
 }
